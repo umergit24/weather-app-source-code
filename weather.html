@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      background-color: #007bff;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: 32px;
+    }
+
+    p {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    form {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 200px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .weather-icon {
+      width: 30px;
+      height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Weather App</h1>
+    <p>by Umer Abdullah Khan</p>
+  </div>
+
+  <div class="container">
+    <form method="POST">
+      <input name="city" type="text" placeholder="City Name">
+      <button>Get Weather</button>
+    </form>
+
+    {% if error_message %}
+      <p>{{ error_message }}</p>
+    {% endif %}
+
+    {% if forecast %}
+      <h2>{{ city }}</h2>
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Temperature</th>
+          <th>Description</th>
+          <th>Icon</th>
+        </tr>
+        {% for entry in forecast %}
+          <tr>
+            <td>{{ entry.date }}</td>
+            <td>{{ entry.temp }}°C</td>
+            <td>{{ entry.desc }}</td>
+            <td><img class="weather-icon" src="http://openweathermap.org/img/w/{{ entry.icon }}.png" alt="Weather Icon"></td>
+          </tr>
+        {% endfor %}
+      </table>
+    {% endif %}
+  </div>
+</body>
+</html>
